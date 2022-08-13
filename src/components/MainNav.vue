@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full text-sm"></header>
+  <header class="w-full text-sm">Main Menu</header>
 </template>
 
 <script>
