@@ -1,5 +1,5 @@
 <template>
-  <h1>I'am a Vue JS App</h1>
+  <h1 class="text-6xl mt-8 text-center">I'am a VueJS Application</h1>
 </template>
 
 <script>
