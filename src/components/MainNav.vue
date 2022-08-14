@@ -1,6 +1,12 @@
 <template>
   <header class="w-full text-sm">
-    <div class="fixed w-full top-0 left-0 h-16 bg-white"></div>
+    <div class="fixed w-full top-0 left-0 h-16 bg-white">
+      <div
+        class="flex flex-nowrap h-full px-8 mx-auto border-b border-solid border-brand-gray-1"
+      >
+        <a href="/" class="flex items-center h-full text-xl">Bobo Careers</a>
+      </div>
+    </div>
   </header>
 </template>
 
