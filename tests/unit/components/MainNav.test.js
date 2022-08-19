@@ -5,6 +5,11 @@ import MainNav from "@/components/MainNav";
 describe("MainNav", () => {
   it("displays company name", () => {
     const wrapper = mount(MainNav);
-    expect(wrapper.text()).toMatch("Bobo Careers");
+
+    wrapper.setData({
+      company: "Super Corp",
+    });
+
+    expect(wrapper.text()).toMatch("Super Corp");
   });
 });
