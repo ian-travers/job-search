@@ -7,6 +7,31 @@
         <a :href="url" class="flex items-center h-full text-xl">
           {{ company }}
         </a>
+
+        <nav class="h-full ml-12">
+          <ul class="flex h-full p-0 m-0 list-none space-x-9">
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5">Teams</a>
+            </li>
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5">Locations</a>
+            </li>
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5"
+                >Life at Bobo Corp</a
+              >
+            </li>
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5">How we hire</a>
+            </li>
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5">Students</a>
+            </li>
+            <li class="h-full">
+              <a href="" class="h-full flex items-center py-2.5">Jobs</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </header>
