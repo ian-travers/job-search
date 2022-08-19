@@ -13,7 +13,7 @@
             <li class="h-full">
               <a href="" class="h-full flex items-center py-2.5">Teams</a>
             </li>
-            <li class="h-full" v-for="menuItem in menuItems">
+            <li v-for="menuItem in menuItems" :key="menuItem" class="h-full">
               <a href="" class="h-full flex items-center py-2.5">{{
                 menuItem
               }}</a>
