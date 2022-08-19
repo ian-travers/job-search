@@ -13,22 +13,10 @@
             <li class="h-full">
               <a href="" class="h-full flex items-center py-2.5">Teams</a>
             </li>
-            <li class="h-full">
-              <a href="" class="h-full flex items-center py-2.5">Locations</a>
-            </li>
-            <li class="h-full">
-              <a href="" class="h-full flex items-center py-2.5"
-                >Life at Bobo Corp</a
-              >
-            </li>
-            <li class="h-full">
-              <a href="" class="h-full flex items-center py-2.5">How we hire</a>
-            </li>
-            <li class="h-full">
-              <a href="" class="h-full flex items-center py-2.5">Students</a>
-            </li>
-            <li class="h-full">
-              <a href="" class="h-full flex items-center py-2.5">Jobs</a>
+            <li class="h-full" v-for="menuItem in menuItems">
+              <a href="" class="h-full flex items-center py-2.5">{{
+                menuItem
+              }}</a>
             </li>
           </ul>
         </nav>
@@ -45,6 +33,14 @@ export default {
     return {
       company: "Bobo Careers",
       url: "https://careers.google.com",
+      menuItems: [
+        "Teams",
+        "Locations",
+        "Life in Bobo",
+        "How we hire",
+        "Students",
+        "Jobs",
+      ],
     };
   },
 };
