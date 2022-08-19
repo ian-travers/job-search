@@ -3,10 +3,10 @@ import { mount } from "@vue/test-utils";
 import MainNav from "@/components/MainNav";
 
 describe("MainNav", () => {
-  it("displays company name", () => {
+  it("displays company name", async () => {
     const wrapper = mount(MainNav);
 
-    wrapper.setData({
+    await wrapper.setData({
       company: "Super Corp",
     });
 
