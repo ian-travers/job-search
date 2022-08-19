@@ -5,6 +5,6 @@ import MainNav from "@/components/MainNav";
 describe("MainNav", () => {
   it("displays company name", () => {
     const wrapper = mount(MainNav);
-    console.log(wrapper.text());
+    expect(wrapper.text()).toMatch("Bobo Careers");
   });
 });
