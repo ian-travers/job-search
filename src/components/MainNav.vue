@@ -10,7 +10,12 @@
 
         <nav class="h-full ml-12">
           <ul class="flex h-full p-0 m-0 list-none space-x-9">
-            <li v-for="menuItem in menuItems" :key="menuItem" class="h-full">
+            <li
+              v-for="menuItem in menuItems"
+              :key="menuItem"
+              class="h-full"
+              data-test="main-nav-list-item"
+            >
               <a href="" class="h-full flex items-center py-2.5">{{
                 menuItem
               }}</a>
