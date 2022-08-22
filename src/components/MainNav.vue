@@ -33,7 +33,7 @@ export default {
       menuItems: [
         "Teams",
         "Locations",
-        "Life in Bobo",
+        "Life at Bobo",
         "How we hire",
         "Students",
         "Jobs",
