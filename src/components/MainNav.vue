@@ -24,7 +24,7 @@
         </nav>
 
         <div class="flex items-center h-full ml-auto">
-          <action-button />
+          <action-button v-if="!isLoggedIn" />
         </div>
       </div>
     </div>
@@ -50,6 +50,7 @@ export default {
         "Students",
         "Jobs",
       ],
+      isLoggedIn: false,
     };
   },
 };
