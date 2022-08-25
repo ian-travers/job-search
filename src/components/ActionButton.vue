@@ -1,5 +1,5 @@
 <template>
-  <button :class="{ primary: true }">
+  <button :class="{ primary: isPrimary }">
     {{ text }}
   </button>
 </template>
@@ -8,6 +8,11 @@
 export default {
   name: "ActionButton",
   props: ["text"],
+  data() {
+    return {
+      isPrimary: true,
+    };
+  },
 };
 </script>
 
