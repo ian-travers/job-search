@@ -1,7 +1,5 @@
 <template>
-  <button
-    class="font-medium text-white bg-brand-blue-1 border-0 rounded hover:shadow-blue transition px-5 py-3"
-  >
+  <button class="primary">
     {{ text }}
   </button>
 </template>
@@ -12,3 +10,13 @@ export default {
   props: ["text"],
 };
 </script>
+
+<style scoped>
+button {
+  @apply px-5 py-3 font-medium rounded transition;
+}
+
+.primary {
+  @apply text-white bg-brand-blue-1 hover:shadow-blue;
+}
+</style>
