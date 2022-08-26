@@ -7,7 +7,11 @@
 <script>
 export default {
   name: "ActionButton",
-  props: ["text", "type"],
+  // props: ["text", "type"],
+  props: {
+    text: { type: String, required: true },
+    type: { type: String, default: "primary" },
+  },
   data() {
     return {
       primary: this.isPrimary,
