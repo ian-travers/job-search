@@ -7,10 +7,18 @@
 <script>
 export default {
   name: "ActionButton",
-  // props: ["text", "type"],
   props: {
-    text: { type: String, required: true },
-    type: { type: String, default: "primary" },
+    text: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      default: "primary",
+      validator(value) {
+        return ["primary", "secondary"].includes(value);
+      },
+    },
   },
   data() {
     return {
