@@ -17,6 +17,7 @@ describe("Action Button", () => {
     const wrapper = mount(ActionButton, {
       props: {
         type: "primary",
+        text: "Click me",
       },
     });
 
