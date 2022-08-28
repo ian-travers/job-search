@@ -8,7 +8,7 @@ describe("Subnav", () => {
       const wrapper = mount(Subnav, {
         data() {
           return {
-            onJobResultPage: true,
+            onJobResultsPage: true,
           };
         },
       });
@@ -24,7 +24,7 @@ describe("Subnav", () => {
       const wrapper = mount(Subnav, {
         data() {
           return {
-            onJobResultPage: false,
+            onJobResultsPage: false,
           };
         },
       });
