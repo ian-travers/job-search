@@ -3,7 +3,9 @@
     <section class="flex flex-col h-screen pt-10 pb-20 bg-yellow-200">
       <div class="grid grid-cols-12">
         <div class="col-start-1 col-span-1 border border-blue-500">1 col</div>
-        <div class="col-start-2 col-span-5 border border-blue-500">5 cols</div>
+        <div class="col-start-2 col-span-5 border border-blue-500">
+          <headline />
+        </div>
         <div class="col-start-7 col-span-5 border border-blue-500">5 cols</div>
         <div class="col-start-12 col-span-1 border border-blue-500">1 col</div>
       </div>
@@ -12,19 +14,19 @@
 </template>
 
 <script>
+import Headline from "@/components/Headline.vue";
+
 export default {
   name: "Hero",
-  beforeCreate() {
-    console.log("Component is about to be created");
+  components: { Headline },
+  data() {
+    return {
+      sample: "Hello there",
+    };
   },
+
   created() {
-    console.log("Components has been created");
-  },
-  beforeMount() {
-    console.log("Component is about to be mounted");
-  },
-  mounted() {
-    console.log("Components has been mounted in the DOM");
+    console.log("My data exists. Look, ", this.sample);
   },
 };
 </script>
