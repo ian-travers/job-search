@@ -1,7 +1,12 @@
 <template>
   <main>
     <section class="flex flex-col h-screen pt-10 pb-20 bg-yellow-200">
-      I can be your hero
+      <div class="grid grid-cols-12">
+        <div class="col-start-1 col-span-1 border border-blue-500">1 col</div>
+        <div class="col-start-2 col-span-5 border border-blue-500">5 cols</div>
+        <div class="col-start-7 col-span-5 border border-blue-500">5 cols</div>
+        <div class="col-start-12 col-span-1 border border-blue-500">1 col</div>
+      </div>
     </section>
   </main>
 </template>
