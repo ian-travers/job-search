@@ -19,14 +19,5 @@ import Headline from "@/components/Headline.vue";
 export default {
   name: "Hero",
   components: { Headline },
-  data() {
-    return {
-      sample: "Hello there",
-    };
-  },
-
-  created() {
-    console.log("My data exists. Look, ", this.sample);
-  },
 };
 </script>
