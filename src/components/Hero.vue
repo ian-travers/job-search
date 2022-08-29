@@ -14,5 +14,17 @@
 <script>
 export default {
   name: "Hero",
+  beforeCreate() {
+    console.log("Component is about to be created");
+  },
+  created() {
+    console.log("Components has been created");
+  },
+  beforeMount() {
+    console.log("Component is about to be mounted");
+  },
+  mounted() {
+    console.log("Components has been mounted in the DOM");
+  },
 };
 </script>
