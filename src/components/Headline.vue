@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>
+    <h1 class="text-8xl font-bold tracking-tighter mb-14">
       <span :class="actionClasses">{{ action }}</span>
       <br />
       for everyone
