@@ -7,9 +7,9 @@ describe("Headline", () => {
     it("tracks whether it has been called", () => {
       const mockFunction = jest.fn();
 
-      mockFunction();
+      mockFunction(1, 2, 3);
 
-      expect(mockFunction).toHaveBeenCalled();
+      expect(mockFunction).toHaveBeenCalledWith(1, 2, 3);
     });
   });
 });
