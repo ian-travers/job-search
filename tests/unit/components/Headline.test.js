@@ -3,12 +3,14 @@ import { mount } from "@vue/test-utils";
 import Headline from "@/components/Headline";
 
 describe("Headline", () => {
-  describe("Jest playground", () => {
-    it("tracks whether it has been called", () => {
-      jest.useFakeTimers("legacy");
-      console.log(clearInterval);
+  it("displays introductory action verb", () => {
+    jest.useFakeTimers("legacy");
 
-      jest.useFakeTimers();
-    });
+    const wrapper = mount(Headline);
+    const actionPhrase = wrapper.find("[data-test='action-phrase']");
+
+    expect(actionPhrase.text()).toBe("Build for everyone");
+
+    jest.useRealTimers();
   });
 });
