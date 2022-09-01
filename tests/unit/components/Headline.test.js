@@ -5,11 +5,10 @@ import Headline from "@/components/Headline";
 describe("Headline", () => {
   describe("Jest playground", () => {
     it("tracks whether it has been called", () => {
-      const mockFunction = jest.fn();
+      jest.useFakeTimers("legacy");
+      console.log(clearInterval);
 
-      mockFunction(1, 2, 3);
-
-      expect(mockFunction).toHaveBeenCalledWith(1, 2, 3);
+      jest.useFakeTimers();
     });
   });
 });
