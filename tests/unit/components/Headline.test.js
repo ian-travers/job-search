@@ -38,4 +38,15 @@ describe("Headline", () => {
 
     jest.useRealTimers();
   });
+
+  it("removes interval when component disappears", () => {
+    jest.useFakeTimers("legacy");
+
+    const wrapper = mount(Headline);
+    wrapper.unmount();
+
+    expect(clearInterval).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
 });
