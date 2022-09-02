@@ -37,11 +37,11 @@ export default {
 
 <style scoped>
 button {
-  @apply px-5 py-3 font-medium rounded transition;
+  @apply px-5 py-3 font-medium transition;
 }
 
 .primary {
-  @apply text-white bg-brand-blue-1 hover:shadow-blue;
+  @apply text-white bg-brand-blue-1 hover:shadow-blue rounded;
 }
 
 .secondary {
