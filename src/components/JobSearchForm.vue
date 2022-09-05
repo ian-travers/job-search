@@ -8,6 +8,7 @@
         <label class="absolute left-0 -top-10">Role</label>
         <input
           type="text"
+          :value="role"
           class="w-full text-lg font-normal focus:outline-none"
           placeholder="Software engineer"
         />
@@ -20,6 +21,7 @@
         <label class="absolute left-0 -top-10">Where?</label>
         <input
           type="text"
+          :value="location"
           class="w-full text-lg font-normal focus:outline-none"
           placeholder="Los Angeles"
         />
@@ -33,6 +35,14 @@
 import ActionButton from "@/components/ActionButton.vue";
 export default {
   name: "JobSearchForm",
+
   components: { ActionButton },
+
+  data() {
+    return {
+      role: "",
+      location: "",
+    };
+  },
 };
 </script>
