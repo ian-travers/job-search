@@ -7,8 +7,8 @@
       <div class="relative flex flex-1 items-center h-full pr-3">
         <label class="absolute left-0 -top-10">Role</label>
         <input
+          v-model="role"
           type="text"
-          :value="role"
           class="w-full text-lg font-normal focus:outline-none"
           placeholder="Software engineer"
         />
@@ -20,8 +20,8 @@
       <div class="relative flex flex-1 items-center h-full pl-3">
         <label class="absolute left-0 -top-10">Where?</label>
         <input
+          v-model="location"
           type="text"
-          :value="location"
           class="w-full text-lg font-normal focus:outline-none"
           placeholder="Los Angeles"
         />
