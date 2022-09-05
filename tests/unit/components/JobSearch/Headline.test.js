@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 
-import Headline from "@/components/Headline";
+import Headline from "@/components/JobSearch/Headline";
 
 describe("Headline", () => {
   beforeEach(() => {
