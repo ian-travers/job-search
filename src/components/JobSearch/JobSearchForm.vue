@@ -7,6 +7,7 @@
       <div class="relative flex flex-1 items-center h-full pr-3">
         <label class="absolute left-0 -top-10">Role</label>
         <text-input
+          :value="role"
           placeholder="Software engineer"
           @handle-input="role = $event"
         />
@@ -18,6 +19,7 @@
       <div class="relative flex flex-1 items-center h-full pl-3">
         <label class="absolute left-0 -top-10">Where?</label>
         <text-input
+          :value="location"
           placeholder="Los Angeles"
           @handle-input="location = $event"
         />
