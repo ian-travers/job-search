@@ -2,7 +2,7 @@
   <input
     type="text"
     class="w-full text-lg font-normal focus:outline-none"
-    :value="value"
+    :value="modelValue"
     :placeholder="placeholder"
     @input="handleInput"
   />
@@ -14,12 +14,12 @@ export default {
 
   props: {
     placeholder: { type: String, default: "" },
-    value: { type: String, required: true },
+    modelValue: { type: String, required: true },
   },
 
   methods: {
     handleInput($event) {
-      this.$emit("handleInput", $event.target.value);
+      this.$emit("update:modelValue", $event.target.value);
     },
   },
 };
