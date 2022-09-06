@@ -12,11 +12,12 @@ describe("TextInput", () => {
 
     const input = wrapper.find("input");
 
-    console.log(wrapper.emitted());
+    input.setValue("N");
+    input.setValue("NY");
+    input.setValue("NYC");
 
-    input.setValue("B");
-    input.setValue("Bo");
-
-    console.log(wrapper.emitted());
+    const messages = wrapper.emitted()["update:modelValue"];
+    //console.log(messages);
+    expect(messages).toEqual([["N"], ["NY"], ["NYC"]]);
   });
 });
