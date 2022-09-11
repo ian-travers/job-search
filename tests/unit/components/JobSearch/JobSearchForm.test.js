@@ -9,6 +9,7 @@ describe("JobSearchForm", () => {
       const $router = { push };
 
       const wrapper = mount(JobSearchForm, {
+        attachTo: document.body,
         global: {
           mocks: {
             $router,
@@ -20,7 +21,7 @@ describe("JobSearchForm", () => {
       });
 
       const roleInput = wrapper.find("[data-test='role-input']");
-      await roleInput.setValue("Vue Deleloper");
+      await roleInput.setValue("Vue Developer");
 
       const locationInput = wrapper.find("[data-test='location-input']");
       await locationInput.setValue("New York");
@@ -30,7 +31,7 @@ describe("JobSearchForm", () => {
 
       expect(push).toHaveBeenCalledWith({
         name: "JobResults",
-        query: { role: "Vue Develper", location: "New York" },
+        query: { role: "Vue Developer", location: "New York" },
       });
     });
   });
