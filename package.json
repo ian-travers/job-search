@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "test:unit-coverage": "vue-cli-service test:unit --coverage",
     "test:watch": "vue-cli-service test:unit --watch",
-    "backend": "json-server --watch"
+    "backend": "json-server --watch db.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
