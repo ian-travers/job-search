@@ -6,6 +6,8 @@ describe("JobListing", () => {
   const createJobProps = (jobProps = {}) => ({
     title: "Vue Developer",
     organization: "ClearAir",
+    locations: ["Los Angeles"],
+    minimumQualifications: ["Programming"],
     ...jobProps,
   });
 
@@ -32,5 +34,23 @@ describe("JobListing", () => {
     const wrapper = mount(JobListing, createObject(jobProps));
 
     expect(wrapper.text()).toMatch("Air Corp");
+  });
+
+  it("renders job locations", () => {
+    const jobProps = createJobProps({ locations: ["New York", "Dallas"] });
+    const wrapper = mount(JobListing, createObject(jobProps));
+
+    expect(wrapper.text()).toMatch("New York");
+    expect(wrapper.text()).toMatch("Dallas");
+  });
+
+  it("renders job qualifications", () => {
+    const jobProps = createJobProps({
+      minimumQualifications: ["Coding", "Testing"],
+    });
+    const wrapper = mount(JobListing, createObject(jobProps));
+
+    expect(wrapper.text()).toMatch("Coding");
+    expect(wrapper.text()).toMatch("Testing");
   });
 });
