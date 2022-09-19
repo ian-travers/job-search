@@ -8,6 +8,12 @@
         data-test="job-listing"
       />
     </ol>
+
+    <div class="mx-auto mt-8">
+      <div class="flex flex-nowrap">
+        <p class="text-sm flex-grow">Page {{ currentPage }}</p>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -27,9 +33,13 @@ export default {
   },
 
   computed: {
-    displayedJobs() {
+    currentPage() {
       const pageString = this.$route.query.page || "1";
-      const pageNumber = Number.parseInt(pageString);
+
+      return Number.parseInt(pageString);
+    },
+    displayedJobs() {
+      const pageNumber = this.currentPage;
       const firstJobIndex = (pageNumber - 1) * 10;
       const lastJobIndex = pageNumber * 10;
 
