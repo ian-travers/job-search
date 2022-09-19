@@ -6,6 +6,7 @@ import JobListings from "@/components/JobResults/JobListings";
 
 describe("JobListings", () => {
   it("fetches jobs", () => {
+    axios.get.mockResolvedValue({ data: [] });
     shallowMount(JobListings);
 
     expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs");
