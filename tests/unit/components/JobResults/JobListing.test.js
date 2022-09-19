@@ -53,4 +53,13 @@ describe("JobListing", () => {
     expect(wrapper.text()).toMatch("Coding");
     expect(wrapper.text()).toMatch("Testing");
   });
+
+  it("links to specific job's page", () => {
+    const jobProps = createJobProps({ id: 145 });
+    const wrapper = mount(JobListing, createObject(jobProps));
+    const jobPageLink = wrapper.findComponent(RouterLinkStub);
+    const toProp = jobPageLink.props("to");
+
+    expect(toProp).toBe("/jobs/results/145");
+  });
 });
