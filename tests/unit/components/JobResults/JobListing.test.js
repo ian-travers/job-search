@@ -3,12 +3,15 @@ import { mount, RouterLinkStub } from "@vue/test-utils";
 import JobListing from "@/components/JobResults/JobListing";
 
 describe("JobListing", () => {
-  const createObject = () => ({
+  const createJobProps = (jobProps = {}) => ({
+    title: "Vue Developer",
+    organization: "ClearAir",
+    ...jobProps,
+  });
+
+  const createObject = (jobProps) => ({
     props: {
-      job: {
-        title: "Vue Developer",
-        organization: "ClearAir",
-      },
+      job: { ...jobProps },
     },
     global: {
       stubs: {
@@ -18,14 +21,16 @@ describe("JobListing", () => {
   });
 
   it("renders job title", () => {
-    const wrapper = mount(JobListing, createObject());
+    const jobProps = createJobProps({ title: "Vue Programmer" });
+    const wrapper = mount(JobListing, createObject(jobProps));
 
-    expect(wrapper.text()).toMatch("Vue Developer");
+    expect(wrapper.text()).toMatch("Vue Programmer");
   });
 
   it("renders job organization", () => {
-    const wrapper = mount(JobListing, createObject());
+    const jobProps = createJobProps({ organization: "Air Corp" });
+    const wrapper = mount(JobListing, createObject(jobProps));
 
-    expect(wrapper.text()).toMatch("ClearAir");
+    expect(wrapper.text()).toMatch("Air Corp");
   });
 });
