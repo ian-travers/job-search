@@ -12,6 +12,20 @@
     <div class="mx-auto mt-8">
       <div class="flex flex-nowrap">
         <p class="text-sm flex-grow">Page {{ currentPage }}</p>
+        <div class="flex items-center justify-center">
+          <router-link
+            v-if="previousPage"
+            :to="{ name: 'JobResults', query: { page: previousPage } }"
+            class="text-sm font-semibold text-brand-blue-1 mx-3"
+            >Previous</router-link
+          >
+          <router-link
+            v-if="nextPage"
+            :to="{ name: 'JobResults', query: { page: nextPage } }"
+            class="text-sm font-semibold text-brand-blue-1 mx-3"
+            >Next</router-link
+          >
+        </div>
       </div>
     </div>
   </main>
@@ -48,7 +62,7 @@ export default {
       const nextPage = this.currentPage + 1;
       const maxPage = this.jobs.length / 10;
 
-      return nextPage <= maxPage ? maxPage : undefined;
+      return nextPage <= maxPage ? nextPage : undefined;
     },
     displayedJobs() {
       const pageNumber = this.currentPage;
