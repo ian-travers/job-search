@@ -1,23 +1,21 @@
 import { createStore } from "vuex";
 
+export const state = () => {
+  return {
+    isLoggedIn: false,
+  };
+};
+
+export const mutations = {
+  LOGIN_USER(state) {
+    state.isLoggedIn = true;
+  },
+};
+
 const store = createStore({
-  state() {
-    return {
-      isLoggedIn: false,
-    };
-  },
-
-  mutations: {
-    LOGIN_USER(state) {
-      state.isLoggedIn = true;
-    },
-  },
-
+  state,
+  mutations,
   strict: process.env.NODE_ENV !== "production",
 });
-
-console.log(store.state);
-store.commit("LOGIN_USER");
-console.log(store.state);
 
 export default store;
