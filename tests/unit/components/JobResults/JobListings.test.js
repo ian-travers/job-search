@@ -5,6 +5,10 @@ jest.mock("axios");
 import JobListings from "@/components/JobResults/JobListings";
 
 describe("JobListings", () => {
+  afterEach(() => {
+    axios.get.mockReset();
+  });
+
   const createRoute = (queryParams = {}) => ({
     query: {
       page: "1",
