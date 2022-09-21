@@ -16,4 +16,8 @@ const store = createStore({
   strict: process.env.NODE_ENV !== "production",
 });
 
+console.log(store.state);
+store.commit("LOGIN_USER");
+console.log(store.state);
+
 export default store;
