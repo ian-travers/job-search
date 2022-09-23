@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const getJobs = () => {
+const getJobs = async () => {
   const baseURL = process.env.VUE_APP_API_URL;
-  axios.get(`${baseURL}/jobs`);
+  const response = await axios.get(`${baseURL}/jobs`);
+
+  return response.data;
 };
 
 export default getJobs;
