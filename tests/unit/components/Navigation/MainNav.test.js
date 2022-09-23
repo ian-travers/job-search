@@ -77,4 +77,18 @@ describe("MainNav", () => {
       expect(subnav.exists()).toBe(true);
     });
   });
+
+  describe("when user is logged out", () => {
+    it("issues call to Vuex to login user", async () => {
+      const store = createStore();
+      const commit = jest.fn();
+      store.commit = commit;
+      const wrapper = shallowMount(MainNav, createConfig(store));
+      const loginButton = wrapper.find("[data-test='login-button']");
+
+      await loginButton.trigger("click");
+
+      expect(commit).toBeCalledWith("LOGIN_USER");
+    });
+  });
 });
