@@ -1,18 +1,8 @@
 import { shallowMount, flushPromises, RouterLinkStub } from "@vue/test-utils";
-import axios from "axios";
-jest.mock("axios");
 
 import JobListings from "@/components/JobResults/JobListings";
 
 describe("JobListings", () => {
-  beforeEach(() => {
-    axios.get.mockResolvedValue({ data: Array(15).fill({}) });
-  });
-
-  afterEach(() => {
-    axios.get.mockReset();
-  });
-
   const createRoute = (queryParams = {}) => ({
     query: {
       page: "1",
@@ -20,10 +10,11 @@ describe("JobListings", () => {
     },
   });
 
-  const createConfig = ($route) => ({
+  const createConfig = ($route, $store) => ({
     global: {
       mocks: {
         $route,
+        $store,
       },
       stubs: {
         "router-link": RouterLinkStub,
@@ -31,18 +22,16 @@ describe("JobListings", () => {
     },
   });
 
-  it("fetches jobs", () => {
-    const $route = createRoute();
-    shallowMount(JobListings, createConfig($route));
-
-    expect(axios.get).toHaveBeenCalledWith("http://fake-api.com/jobs");
-  });
-
-  it("creates a job listing for a maximum of 10 jobs received job", async () => {
-    axios.get.mockResolvedValue({ data: Array(15).fill({}) });
+  fit("creates a job listing for a maximum of 10 jobs received job", async () => {
     const queryParams = { page: "1" };
     const $route = createRoute(queryParams);
-    const wrapper = shallowMount(JobListings, createConfig($route));
+    const $store = {
+      state: {
+        jobs: Array(15).fill({}),
+      },
+      dispatch: jest.fn(),
+    };
+    const wrapper = shallowMount(JobListings, createConfig($route, $store));
     await flushPromises();
     const jobListings = wrapper.findAll("[data-test='job-listing']");
 
@@ -92,7 +81,6 @@ describe("JobListings", () => {
 
   describe("when user is on last page of job results", () => {
     it("does not show link to next page", async () => {
-      axios.get.mockResolvedValue({ data: Array(15).fill({}) });
       const queryParams = { page: 2 };
       const $route = createRoute(queryParams);
       const wrapper = shallowMount(JobListings, createConfig($route));
@@ -103,7 +91,6 @@ describe("JobListings", () => {
     });
 
     it("shows link to previous page", async () => {
-      axios.get.mockResolvedValue({ data: Array(15).fill({}) });
       const queryParams = { page: 2 };
       const $route = createRoute(queryParams);
       const wrapper = shallowMount(JobListings, createConfig($route));
