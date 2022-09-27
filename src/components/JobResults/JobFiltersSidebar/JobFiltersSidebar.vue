@@ -8,7 +8,9 @@
         </div>
       </div>
 
-      <accordion>
+      <accordion header="Job types"> </accordion>
+
+      <accordion header="Organizations">
         <div class="mt-5">
           <fieldset>
             <ul class="flex flex-wrap">
