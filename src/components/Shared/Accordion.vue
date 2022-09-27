@@ -11,7 +11,7 @@
 
     <div v-if="isOpen" class="w-full mt-5">
       <slot>
-        <p>Oops, no content was provided.</p>
+        <p>Woops, no content was provided.</p>
       </slot>
     </div>
   </div>

@@ -25,4 +25,24 @@ describe("Accordion", () => {
 
     expect(wrapper.text()).toMatch("Nested Child");
   });
+
+  describe("when we don't provide custom child content", () => {
+    it("renders default content", async () => {
+      const wrapper = mount(Accordion, {
+        global: {
+          stubs: {
+            FontAwesomeIcon: true,
+          },
+        },
+        props: {
+          header: "Test Header",
+        },
+      });
+
+      const clickableArea = wrapper.find("[data-test='clickable-area']");
+      await clickableArea.trigger("click");
+
+      expect(wrapper.text()).toMatch("Woops, no content was provided.");
+    });
+  });
 });
