@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <accordion header="Job types"> </accordion>
+      <accordion header="Job types"></accordion>
 
       <accordion header="Organizations">
         <div class="mt-5">

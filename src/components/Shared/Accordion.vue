@@ -2,6 +2,7 @@
   <div class="border-b border-brand-gray-2 py-5">
     <div
       class="flex flex-wrap items-center justify-between cursor-pointer"
+      data-test="clickable-area"
       @click="open"
     >
       <h3 class="text-base font-semibold">{{ header }}</h3>
@@ -9,7 +10,9 @@
     </div>
 
     <div v-if="isOpen" class="w-full mt-5">
-      <slot></slot>
+      <slot>
+        <p>Oops, no content was provided.</p>
+      </slot>
     </div>
   </div>
 </template>
