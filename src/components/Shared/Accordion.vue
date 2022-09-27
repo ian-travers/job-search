@@ -8,7 +8,9 @@
       <font-awesome-icon :icon="caretIcon" />
     </div>
 
-    <div v-if="isOpen" class="w-full mt-5">Child</div>
+    <div v-if="isOpen" class="w-full mt-5">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
