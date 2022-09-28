@@ -5,17 +5,22 @@ jest.mock("axios");
 import Spotlight from "@/components/JobSearch/Spotlight";
 
 describe("Spotlight", () => {
-  it("provide IMG attribute to parent", async () => {
+  const mockSpotlightResponse = (data = {}) => {
     axios.get.mockResolvedValue({
       data: [
         {
           img: "Some img",
           title: "Some title",
           description: "Some description",
+          ...data,
         },
       ],
     });
+  };
 
+  it("provide IMG attribute to parent", async () => {
+    const data = { img: "Some img" };
+    mockSpotlightResponse(data);
     const wrapper = mount(Spotlight, {
       slots: {
         default: `<template #default="slotProps">
@@ -29,16 +34,8 @@ describe("Spotlight", () => {
   });
 
   it("provide TITLE attribute to parent", async () => {
-    axios.get.mockResolvedValue({
-      data: [
-        {
-          img: "Some img",
-          title: "Some title",
-          description: "Some description",
-        },
-      ],
-    });
-
+    const data = { img: "Some title" };
+    mockSpotlightResponse(data);
     const wrapper = mount(Spotlight, {
       slots: {
         default: `<template #default="slotProps">
@@ -52,16 +49,8 @@ describe("Spotlight", () => {
   });
 
   it("provide DESCRIPTION attribute to parent", async () => {
-    axios.get.mockResolvedValue({
-      data: [
-        {
-          img: "Some img",
-          title: "Some title",
-          description: "Some description",
-        },
-      ],
-    });
-
+    const data = { img: "Some description" };
+    mockSpotlightResponse(data);
     const wrapper = mount(Spotlight, {
       slots: {
         default: `<template #default="slotProps">
