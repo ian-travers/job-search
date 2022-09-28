@@ -22,13 +22,13 @@
         to="/jobs/results"
         class="flex flex-col border rounded-lg bg-brand-gray-2 w-72 h-96 mx-5"
       >
-        <img :src="slotProps.spotlight.img" class="object-contain" />
+        <img :src="slotProps.img" class="object-contain" />
         <div class="h-48 px-6 py-4 mt-3">
           <h3 class="text-lg font-medium">
-            {{ slotProps.spotlight.title }}
+            {{ slotProps.title }}
           </h3>
           <p class="text-sm mt-3">
-            {{ slotProps.spotlight.description }}
+            {{ slotProps.description }}
           </p>
         </div>
         <router-link
