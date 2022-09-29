@@ -35,5 +35,11 @@ export default {
   name: "JobFiltersSidebarOrganizations",
 
   components: { Accordion },
+
+  computed: {
+    UNIQUE_ORGANIZATIONS() {
+      return this.$store.getters.UNIQUE_ORGANIZATIONS;
+    },
+  },
 };
 </script>
