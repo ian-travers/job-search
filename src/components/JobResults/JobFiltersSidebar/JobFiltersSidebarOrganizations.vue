@@ -9,7 +9,9 @@
             class="h-8 w-1/2"
           >
             <input :id="organization" type="checkbox" class="mr-3" />
-            <label :for="organization">{{ organization }}</label>
+            <label :for="organization" data-test="organization">
+              {{ organization }}
+            </label>
           </li>
         </ul>
       </fieldset>
@@ -19,6 +21,7 @@
 
 <script>
 import Accordion from "@/components/Shared/Accordion.vue";
+
 export default {
   name: "JobFiltersSidebarOrganizations",
 
