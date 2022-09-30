@@ -40,6 +40,15 @@ describe("mutations", () => {
       expect(state.jobs).toEqual(["Job 1", "Job 2"]);
     });
   });
+
+  describe("ADD_SELECTED_ORGANIZATIONS", () => {
+    it("updates selected organizations for filtering purpose", () => {
+      const state = { selectedOrganizations: [] };
+      mutations.ADD_SELECTED_ORGANIZATIONS(state, ["Org1", "Org2"]);
+
+      expect(state.selectedOrganizations).toEqual(["Org1", "Org2"]);
+    });
+  });
 });
 
 describe("getters", () => {
@@ -53,10 +62,7 @@ describe("getters", () => {
           { organization: "Meta" },
         ],
       };
-
       const result = getters.UNIQUE_ORGANIZATIONS(state);
-
-      console.log(result);
 
       expect(result).toEqual(new Set(["Google", "Amazon", "Meta"]));
     });
