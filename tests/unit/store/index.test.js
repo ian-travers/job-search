@@ -67,6 +67,26 @@ describe("getters", () => {
       expect(result).toEqual(new Set(["Google", "Amazon", "Meta"]));
     });
   });
+
+  describe("FILTERED_JOBS_BY_ORGANIZATIONS", () => {
+    it("identifies jobs that are assosiated with the given organizations", () => {
+      const state = {
+        jobs: [
+          { organization: "Google" },
+          { organization: "Amazon" },
+          { organization: "Google" },
+          { organization: "Meta" },
+        ],
+        selectedOrganizations: ["Amazon", "Meta"],
+      };
+      const filteredJobs = getters.FILTERED_JOBS_BY_ORGANIZATIONS(state);
+
+      expect(filteredJobs).toEqual([
+        { organization: "Amazon" },
+        { organization: "Meta" },
+      ]);
+    });
+  });
 });
 
 describe("actions", () => {
