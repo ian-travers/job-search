@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
-import { FETCH_JOBS } from "@/store";
+import { FETCH_JOBS, FILTERED_JOBS_BY_ORGANIZATIONS } from "@/store";
 import JobListing from "./JobListing.vue";
 
 export default {
@@ -45,6 +45,7 @@ export default {
   components: { JobListing },
 
   computed: {
+    ...mapGetters([FILTERED_JOBS_BY_ORGANIZATIONS]),
     currentPage() {
       const pageString = this.$route.query.page || "1";
 
@@ -58,7 +59,9 @@ export default {
     },
     nextPage() {
       const nextPage = this.currentPage + 1;
-      const maxPage = Math.ceil(this.jobs.length / 10);
+      const maxPage = Math.ceil(
+        this.FILTERED_JOBS_BY_ORGANIZATIONS.length / 10
+      );
 
       return nextPage <= maxPage ? nextPage : undefined;
     },
@@ -67,9 +70,11 @@ export default {
       const firstJobIndex = (pageNumber - 1) * 10;
       const lastJobIndex = pageNumber * 10;
 
-      return this.jobs.slice(firstJobIndex, lastJobIndex);
+      return this.FILTERED_JOBS_BY_ORGANIZATIONS.slice(
+        firstJobIndex,
+        lastJobIndex
+      );
     },
-    ...mapState(["jobs"]),
   },
 
   async mounted() {
