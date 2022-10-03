@@ -17,7 +17,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { FILTERED_JOBS_BY_ORGANIZATIONS } from "@/store";
+import { FILTERED_JOBS_BY_ORGANIZATIONS } from "@/store/costants";
 
 export default {
   name: "Subnav",
