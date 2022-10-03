@@ -18,4 +18,10 @@ describe("state", () => {
 
     expect(startingState.selectedOrganizations).toEqual([]);
   });
+
+  it("stores job types for filtering purpose", () => {
+    const startingState = state();
+
+    expect(startingState.selectedJobTypes).toEqual([]);
+  });
 });
