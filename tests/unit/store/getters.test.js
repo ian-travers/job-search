@@ -58,4 +58,20 @@ describe("getters", () => {
       });
     });
   });
+
+  describe("UNIQUE_JOB_TYPES", () => {
+    it("finds unique job types from list of jobs", () => {
+      const state = {
+        jobs: [
+          { jobType: "Full-time" },
+          { jobType: "Intern" },
+          { jobType: "Remote" },
+          { jobType: "Intern" },
+        ],
+      };
+      const result = getters.UNIQUE_JOB_TYPES(state);
+
+      expect(result).toEqual(new Set(["Full-time", "Intern", "Remote"]));
+    });
+  });
 });
