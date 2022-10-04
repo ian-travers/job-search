@@ -9,17 +9,23 @@
       </div>
 
       <job-filters-sidebar-organizations />
+      <job-filters-sidebar-job-types />
     </section>
   </div>
 </template>
 
 <script>
 import ActionButton from "@/components/Shared/ActionButton.vue";
-import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations.vue";
+import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobTypes";
+import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations";
 
 export default {
   name: "JobFIltersSidebar",
 
-  components: { ActionButton, JobFiltersSidebarOrganizations },
+  components: {
+    ActionButton,
+    JobFiltersSidebarJobTypes,
+    JobFiltersSidebarOrganizations,
+  },
 };
 </script>
