@@ -74,4 +74,47 @@ describe("getters", () => {
       expect(result).toEqual(new Set(["Full-time", "Intern", "Remote"]));
     });
   });
+
+  describe("FILTERED_JOBS_BY_JOB_TYPES", () => {
+    it("identifies jobs that are assosiated with the given job types", () => {
+      const state = {
+        jobs: [
+          { jobType: "Full-time" },
+          { jobType: "Part-time" },
+          { jobType: "Remote" },
+          { jobType: "Full-time" },
+        ],
+        selectedJobTypes: ["Full-time", "Remote"],
+      };
+      const filteredJobs = getters.FILTERED_JOBS_BY_JOB_TYPES(state);
+
+      expect(filteredJobs).toEqual([
+        { jobType: "Full-time" },
+        { jobType: "Remote" },
+        { jobType: "Full-time" },
+      ]);
+    });
+
+    describe("when user has not selected any job types", () => {
+      it("returns all jobs", () => {
+        const state = {
+          jobs: [
+            { jobType: "Full-time" },
+            { jobType: "Part-time" },
+            { jobType: "Remote" },
+            { jobType: "Full-time" },
+          ],
+          selectedJobTypes: [],
+        };
+        const filteredJobs = getters.FILTERED_JOBS_BY_JOB_TYPES(state);
+
+        expect(filteredJobs).toEqual([
+          { jobType: "Full-time" },
+          { jobType: "Part-time" },
+          { jobType: "Remote" },
+          { jobType: "Full-time" },
+        ]);
+      });
+    });
+  });
 });
