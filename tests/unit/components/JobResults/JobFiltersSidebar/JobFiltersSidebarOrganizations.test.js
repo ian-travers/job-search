@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 
 import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations";
 
-describe("JobFiltersSidebarOrganizanions", () => {
+describe("JobFiltersSidebarOrganizations", () => {
   const createConfig = ($store) => ({
     global: {
       mocks: {
