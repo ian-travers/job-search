@@ -80,4 +80,24 @@ describe("getters", () => {
       expect(includeJob).toBe(true);
     });
   });
+
+  describe("FILTERED_JOBS", () => {
+    it("filters jobs by organization and job type", () => {
+      const INCLUDE_JOB_BY_ORGANIZATION = jest.fn().mockReturnValue(true);
+      const INCLUDE_JOB_BY_JOB_TYPE = jest.fn().mockReturnValue(true);
+      const mockGetters = {
+        INCLUDE_JOB_BY_ORGANIZATION,
+        INCLUDE_JOB_BY_JOB_TYPE,
+      };
+      const job = { id: 1, title: "Best job ever" };
+      const state = {
+        jobs: [job],
+      };
+      const result = getters.FILTERED_JOBS(state, mockGetters);
+
+      expect(result).toEqual([job]);
+      expect(INCLUDE_JOB_BY_ORGANIZATION).toHaveBeenCalledWith(job);
+      expect(INCLUDE_JOB_BY_JOB_TYPE).toHaveBeenCalledWith(job);
+    });
+  });
 });
