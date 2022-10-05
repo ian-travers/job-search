@@ -3,10 +3,11 @@ import { mount } from "@vue/test-utils";
 import JobFiltersSidebarOrganizations from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarOrganizations";
 
 describe("JobFiltersSidebarOrganizations", () => {
-  const createConfig = ($store) => ({
+  const createConfig = ($store, $router) => ({
     global: {
       mocks: {
         $store,
+        $router,
       },
       stubs: {
         FontAwesomeIcon: true,
@@ -20,7 +21,11 @@ describe("JobFiltersSidebarOrganizations", () => {
         UNIQUE_ORGANIZATIONS: new Set(["Google", "Amazon"]),
       },
     };
-    const wrapper = mount(JobFiltersSidebarOrganizations, createConfig($store));
+    const $router = { push: jest.fn() };
+    const wrapper = mount(
+      JobFiltersSidebarOrganizations,
+      createConfig($store, $router)
+    );
     const clickableArea = wrapper.find("[data-test='clickable-area']");
     await clickableArea.trigger("click");
 
@@ -30,22 +35,49 @@ describe("JobFiltersSidebarOrganizations", () => {
     expect(organizations).toEqual(["Google", "Amazon"]);
   });
 
-  it("communicates thar user has selected checkbox for organization", async () => {
-    const commit = jest.fn();
+  describe("when user click checkbox", () => {
+    it("communicates thar user has selected checkbox for organization", async () => {
+      const commit = jest.fn();
+      const $store = {
+        getters: {
+          UNIQUE_ORGANIZATIONS: new Set(["Google", "Amazon"]),
+        },
+        commit,
+      };
+      const $router = { push: jest.fn() };
+      const wrapper = mount(
+        JobFiltersSidebarOrganizations,
+        createConfig($store, $router)
+      );
+      const clickableArea = wrapper.find("[data-test='clickable-area']");
+      await clickableArea.trigger("click");
+      const googleInput = wrapper.find("[data-test='Google']");
+      await googleInput.setChecked();
+
+      expect(commit).toHaveBeenLastCalledWith("ADD_SELECTED_ORGANIZATIONS", [
+        "Google",
+      ]);
+    });
+  });
+
+  it("navigate user to job results page to see fresh batch of filtered jobs", async () => {
     const $store = {
       getters: {
         UNIQUE_ORGANIZATIONS: new Set(["Google", "Amazon"]),
       },
-      commit,
+      commit: jest.fn(),
     };
-    const wrapper = mount(JobFiltersSidebarOrganizations, createConfig($store));
+    const push = jest.fn();
+    const $router = { push };
+    const wrapper = mount(
+      JobFiltersSidebarOrganizations,
+      createConfig($store, $router)
+    );
     const clickableArea = wrapper.find("[data-test='clickable-area']");
     await clickableArea.trigger("click");
     const googleInput = wrapper.find("[data-test='Google']");
     await googleInput.setChecked();
 
-    expect(commit).toHaveBeenLastCalledWith("ADD_SELECTED_ORGANIZATIONS", [
-      "Google",
-    ]);
+    expect(push).toHaveBeenCalledWith({ name: "JobResults" });
   });
 });
