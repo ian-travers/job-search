@@ -1,12 +1,10 @@
 const { ref, computed } = require("vue");
 
-let a = ref(1);
-let b = ref(2);
+const name = ref("Boris");
+const title = computed(() => name.value + " the Great");
 
-let c = computed(() => a.value + b.value);
+console.log(title.value);
 
-console.log(c.value);
+name.value = "Peter";
 
-a.value = 8;
-
-console.log(c.value);
+console.log(title.value);
