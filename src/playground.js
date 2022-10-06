@@ -1,9 +1,7 @@
-let a = 1;
-let b = 2;
-let c = a + b;
+const { ref } = require("vue");
 
-console.log(c);
+let a = ref(1);
+let b = ref(2);
 
-a = 5;
-
-console.log(c);
+console.log(a.value);
+console.log(b.value);
