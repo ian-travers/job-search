@@ -1,13 +1,16 @@
 const { reactive, computed } = require("vue");
 
 const person = reactive({
-  name: "Boris",
+  firstName: "Boris",
+  lastName: "Paskhaver",
 });
 
-const title = computed(() => person.name + " the Great");
+const title = computed(
+  () => `${person.firstName} ${person.lastName} the Great`
+);
 
 console.log(title.value);
 
-person.name = "Peter";
+person.firstName = "Peter";
 
 console.log(title.value);
