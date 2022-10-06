@@ -1,13 +1,14 @@
-const { reactive, computed } = require("vue");
+const { reactive, computed, toRef } = require("vue");
 
 const person = reactive({
   firstName: "Boris",
   lastName: "Paskhaver",
 });
 
-const { firstName, lastName } = person;
+const firstName = toRef(person, "firstName");
+const lastName = toRef(person, "lastName");
 
-const title = computed(() => `${firstName} ${lastName} the Great`);
+const title = computed(() => `${firstName.value} ${lastName.value} the Great`);
 
 console.log(title.value);
 
