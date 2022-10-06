@@ -1,7 +1,12 @@
-const { ref } = require("vue");
+const { ref, computed } = require("vue");
 
 let a = ref(1);
 let b = ref(2);
 
-console.log(a.value);
-console.log(b.value);
+let c = computed(() => a.value + b.value);
+
+console.log(c.value);
+
+a.value = 8;
+
+console.log(c.value);
