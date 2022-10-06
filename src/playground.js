@@ -1,13 +1,13 @@
-const { ref, computed } = require("vue");
+const { reactive, computed } = require("vue");
 
-const person = ref({
+const person = reactive({
   name: "Boris",
 });
 
-const title = computed(() => person.value.name + " the Great");
+const title = computed(() => person.name + " the Great");
 
 console.log(title.value);
 
-person.value.name = "Peter";
+person.name = "Peter";
 
 console.log(title.value);
