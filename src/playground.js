@@ -5,15 +5,16 @@ const person = reactive({
   lastName: "Paskhaver",
 });
 
-const title = computed(
-  () => `${person.firstName} ${person.lastName} the Great`
-);
-const titleLength = computed(() => title.value.length);
+const { firstName, lastName } = person;
+
+const title = computed(() => `${firstName} ${lastName} the Great`);
 
 console.log(title.value);
-console.log(titleLength.value);
 
 person.firstName = "Oliver";
 
 console.log(title.value);
-console.log(titleLength.value);
+
+person.lastName = "Ewing";
+
+console.log(title.value);
