@@ -25,12 +25,13 @@ export default {
 
   setup() {
     const header = ref("Title");
+    const isOpen = ref(false);
 
     const open = () => {
-      header.value = "Opened Title";
+      isOpen.value = !isOpen.value;
     };
 
-    return { header, open };
+    return { header, open, isOpen };
   },
 
   //   props: {
