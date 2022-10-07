@@ -21,29 +21,35 @@
 export default {
   name: "Accordion",
 
-  props: {
-    header: {
-      type: String,
-      required: true,
-    },
+  setup() {
+    const header = "Header";
+
+    return { header };
   },
 
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
+  //   props: {
+  //     header: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //   },
 
-  computed: {
-    caretIcon() {
-      return this.isOpen ? ["fas", "angle-up"] : ["fas", "angle-down"];
-    },
-  },
+  //   data() {
+  //     return {
+  //       isOpen: false,
+  //     };
+  //   },
 
-  methods: {
-    open() {
-      this.isOpen = !this.isOpen;
-    },
-  },
+  //   computed: {
+  //     caretIcon() {
+  //       return this.isOpen ? ["fas", "angle-up"] : ["fas", "angle-down"];
+  //     },
+  //   },
+
+  //   methods: {
+  //     open() {
+  //       this.isOpen = !this.isOpen;
+  //     },
+  //   },
 };
 </script>
