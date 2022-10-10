@@ -15,18 +15,26 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+// import { mapGetters } from "vuex";
 
-import { FILTERED_JOBS } from "@/store/costants";
+// import { FILTERED_JOBS } from "@/store/costants";
 
 export default {
   name: "Subnav",
 
-  computed: {
-    ...mapGetters([FILTERED_JOBS]),
-    onJobResultsPage() {
-      return this.$route.name === "JobResults";
-    },
+  setup() {
+    const route = useRoute();
+    const onJobResultsPage = computed(() => route.name === "JobResults");
+
+    return { onJobResultsPage };
   },
+  // computed: {
+  //   ...mapGetters([FILTERED_JOBS]),
+  //   onJobResultsPage() {
+  //     return this.$route.name === "JobResults";
+  //   },
+  // },
 };
 </script>
