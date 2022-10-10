@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 export default {
   name: "Accordion",
@@ -31,7 +31,11 @@ export default {
       isOpen.value = !isOpen.value;
     };
 
-    return { header, open, isOpen };
+    const caretIcon = computed(() =>
+      isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
+    );
+
+    return { header, open, isOpen, caretIcon };
   },
 
   //   props: {
