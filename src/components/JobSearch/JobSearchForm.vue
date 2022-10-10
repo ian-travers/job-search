@@ -37,6 +37,7 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import TextInput from "@/components/Shared/TextInput.vue";
@@ -47,10 +48,18 @@ export default {
   components: { ActionButton, TextInput },
 
   setup() {
+    const router = useRouter();
+
     const role = ref("");
     const location = ref("");
 
-    return { role, location };
+    const searchForJobs = () => {
+      router.push({
+        name: "JobResults",
+        query: { role: role.value, location: location.value },
+      });
+    };
+    return { role, location, searchForJobs };
   },
   // data() {
   //   return {
