@@ -1,16 +1,14 @@
 import { mount } from "@vue/test-utils";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+jest.mock("vuex");
+jest.mock("vue-router");
 
 import Subnav from "@/components/Navigation/Subnav";
 
 describe("Subnav", () => {
-  const createConfig = (routeName, $store = {}) => ({
+  const createConfig = () => ({
     global: {
-      mocks: {
-        $route: {
-          name: routeName,
-        },
-        $store,
-      },
       stubs: {
         FontAwesomeIcon: true,
       },
@@ -19,13 +17,17 @@ describe("Subnav", () => {
 
   describe("when user is on job page", () => {
     it("displays job count", () => {
-      const routeName = "JobResults";
-      const $store = {
+      useRoute.mockReturnValue({
+        name: "JobResults",
+      });
+
+      useStore.mockReturnValue({
         getters: {
           FILTERED_JOBS: [{ id: 1 }, { id: 2 }],
         },
-      };
-      const wrapper = mount(Subnav, createConfig(routeName, $store));
+      });
+
+      const wrapper = mount(Subnav, createConfig());
       const jobCount = wrapper.find("[data-test='job-count']");
 
       expect(jobCount.exists()).toBe(true);
@@ -35,8 +37,17 @@ describe("Subnav", () => {
 
   describe("when user is not on job page", () => {
     it("does NOT displays job count", () => {
-      const routeName = "Home";
-      const wrapper = mount(Subnav, createConfig(routeName));
+      useRoute.mockReturnValue({
+        name: "Home",
+      });
+
+      useStore.mockReturnValue({
+        getters: {
+          FILTERED_JOBS: [],
+        },
+      });
+
+      const wrapper = mount(Subnav, createConfig());
       const jobCount = wrapper.find("[data-test='job-count']");
 
       expect(jobCount.exists()).toBe(false);
