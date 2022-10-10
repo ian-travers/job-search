@@ -23,8 +23,14 @@ import { computed, ref } from "vue";
 export default {
   name: "Accordion",
 
+  props: {
+    header: {
+      type: String,
+      required: true,
+    },
+  },
+
   setup() {
-    const header = ref("Title");
     const isOpen = ref(false);
 
     const open = () => {
@@ -35,32 +41,7 @@ export default {
       isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
     );
 
-    return { header, open, isOpen, caretIcon };
+    return { open, isOpen, caretIcon };
   },
-
-  //   props: {
-  //     header: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   },
-
-  //   data() {
-  //     return {
-  //       isOpen: false,
-  //     };
-  //   },
-
-  //   computed: {
-  //     caretIcon() {
-  //       return this.isOpen ? ["fas", "angle-up"] : ["fas", "angle-down"];
-  //     },
-  //   },
-
-  //   methods: {
-  //     open() {
-  //       this.isOpen = !this.isOpen;
-  //     },
-  //   },
 };
 </script>
