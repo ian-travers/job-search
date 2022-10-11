@@ -4,7 +4,7 @@
       <fieldset>
         <ul class="flex flex-wrap">
           <li
-            v-for="jobType in UNIQUE_JOB_TYPES"
+            v-for="jobType in uniqueJobTypes"
             :key="jobType"
             class="h-8 w-1/2"
           >
@@ -28,9 +28,11 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { ref } from "vue";
+import { mapMutations } from "vuex";
 
-import { ADD_SELECTED_JOB_TYPES, UNIQUE_JOB_TYPES } from "@/store/costants";
+import { useUniqueJobTypes } from "@/store/composables";
+import { ADD_SELECTED_JOB_TYPES } from "@/store/costants";
 import Accordion from "@/components/Shared/Accordion.vue";
 
 export default {
@@ -38,14 +40,11 @@ export default {
 
   components: { Accordion },
 
-  data() {
-    return {
-      selectedJobTypes: [],
-    };
-  },
+  setup() {
+    const selectedJobTypes = ref([]);
+    const uniqueJobTypes = useUniqueJobTypes();
 
-  computed: {
-    ...mapGetters([UNIQUE_JOB_TYPES]),
+    return { selectedJobTypes, uniqueJobTypes };
   },
 
   methods: {
