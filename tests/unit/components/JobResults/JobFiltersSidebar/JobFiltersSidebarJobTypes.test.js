@@ -1,14 +1,18 @@
 import { mount } from "@vue/test-utils";
+import { useStore } from "vuex";
+jest.mock("vuex");
+
+import { useRouter } from "vue-router";
+jest.mock("vue-router");
+
+import { useUniqueJobTypes } from "@/store/composables";
+jest.mock("@/store/composables");
 
 import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobTypes";
 
 describe("JobFiltersSidebarJobTypes", () => {
-  const createConfig = ($store, $router) => ({
+  const createConfig = () => ({
     global: {
-      mocks: {
-        $store,
-        $router,
-      },
       stubs: {
         FontAwesomeIcon: true,
       },
@@ -16,16 +20,8 @@ describe("JobFiltersSidebarJobTypes", () => {
   });
 
   it("render unique list of job types for filtering", async () => {
-    const $store = {
-      getters: {
-        UNIQUE_JOB_TYPES: new Set(["Full-time", "Remote"]),
-      },
-    };
-    const $router = { push: jest.fn() };
-    const wrapper = mount(
-      JobFiltersSidebarJobTypes,
-      createConfig($store, $router)
-    );
+    useUniqueJobTypes.mockReturnValue(["Full-time", "Remote"]);
+    const wrapper = mount(JobFiltersSidebarJobTypes, createConfig());
     const clickableArea = wrapper.find("[data-test='clickable-area']");
     await clickableArea.trigger("click");
 
@@ -37,18 +33,11 @@ describe("JobFiltersSidebarJobTypes", () => {
 
   describe("when user click checkbox", () => {
     it("communicates thar user has selected checkbox for job type", async () => {
+      useUniqueJobTypes.mockReturnValue(["Full-time", "Remote"]);
       const commit = jest.fn();
-      const $store = {
-        getters: {
-          UNIQUE_JOB_TYPES: new Set(["Full-tyme", "Remote"]),
-        },
-        commit,
-      };
-      const $router = { push: jest.fn() };
-      const wrapper = mount(
-        JobFiltersSidebarJobTypes,
-        createConfig($store, $router)
-      );
+      useStore.mockReturnValue({ commit });
+      useRouter.mockReturnValue({ push: jest.fn() });
+      const wrapper = mount(JobFiltersSidebarJobTypes, createConfig());
       const clickableArea = wrapper.find("[data-test='clickable-area']");
       await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='Remote']");
@@ -60,18 +49,11 @@ describe("JobFiltersSidebarJobTypes", () => {
     });
 
     it("navigate user to job results page to see fresh batch of filtered jobs", async () => {
-      const $store = {
-        getters: {
-          UNIQUE_JOB_TYPES: new Set(["Full-tyme", "Remote"]),
-        },
-        commit: jest.fn(),
-      };
+      useUniqueJobTypes.mockReturnValue(["Full-time", "Remote"]);
+      useStore.mockReturnValue({ commit: jest.fn() });
       const push = jest.fn();
-      const $router = { push };
-      const wrapper = mount(
-        JobFiltersSidebarJobTypes,
-        createConfig($store, $router)
-      );
+      useRouter.mockReturnValue({ push });
+      const wrapper = mount(JobFiltersSidebarJobTypes, createConfig());
       const clickableArea = wrapper.find("[data-test='clickable-area']");
       await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='Remote']");
