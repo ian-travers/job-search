@@ -1,29 +1,19 @@
 import { shallowMount, flushPromises, RouterLinkStub } from "@vue/test-utils";
 
+import { useFetchJobsDispatch, useFilteredJobs } from "@/store/composables";
+jest.mock("@/store/composables");
+
+import useCurrentPage from "@/composables/useCurrentPage";
+jest.mock("@/composables/useCurrentPage");
+
+import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
+jest.mock("@/composables/usePreviousAndNextPages");
+
 import JobListings from "@/components/JobResults/JobListings";
 
 describe("JobListings", () => {
-  const createRoute = (queryParams = {}) => ({
-    query: {
-      page: "1",
-      ...queryParams,
-    },
-  });
-
-  const createStore = (config = {}) => ({
-    getters: {
-      FILTERED_JOBS: [],
-    },
-    dispatch: jest.fn(),
-    ...config,
-  });
-
-  const createConfig = ($route, $store) => ({
+  const createConfig = () => ({
     global: {
-      mocks: {
-        $route,
-        $store,
-      },
       stubs: {
         "router-link": RouterLinkStub,
       },
@@ -31,15 +21,14 @@ describe("JobListings", () => {
   });
 
   describe("when components mounts", () => {
-    it("makes call to fetch jobs from API", () => {
-      const $route = createRoute();
-      const fakeDispatch = jest.fn();
-      const $store = createStore({
-        dispatch: fakeDispatch,
-      });
-      shallowMount(JobListings, createConfig($route, $store));
+    fit("makes call to fetch jobs from API", () => {
+      useFilteredJobs.mockReturnValue({ value: [] });
+      useCurrentPage.mockReturnValue({ value: 2 });
+      useCurrentPage.mockReturnValue({ value: 2 });
+      usePreviousAndNextPages.mockReturnValue({ previousPage: 1, nextPage: 3 });
+      shallowMount(JobListings, createConfig());
 
-      expect(fakeDispatch).toHaveBeenCalledWith("FETCH_JOBS");
+      expect(useFetchJobsDispatch).toHaveBeenCalled();
     });
   });
 
