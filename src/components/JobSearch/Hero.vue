@@ -18,7 +18,7 @@
     </section>
 
     <spotlight
-      #default="{ img, title, description }"
+      v-slot="{ img, title, description }"
       class="flex justify-center pb-16"
     >
       <router-link
