@@ -46,19 +46,25 @@ describe("mutations", () => {
 
   describe("ADD_SELECTED_ORGANIZATIONS", () => {
     it("updates selected organizations for filtering purpose", () => {
-      const state = { selectedOrganizations: [] };
-      mutations.ADD_SELECTED_ORGANIZATIONS(state, ["Org1", "Org2"]);
+      const startingState = createState({ selectedOrganizations: [] });
+      mutations.ADD_SELECTED_ORGANIZATIONS(startingState, ["Org1", "Org2"]);
 
-      expect(state.selectedOrganizations).toEqual(["Org1", "Org2"]);
+      expect(startingState.selectedOrganizations).toEqual(["Org1", "Org2"]);
     });
   });
 
   describe("ADD_SELECTED_JOB_TYPES", () => {
     it("updates selected job types for filtering purpose", () => {
-      const state = { selectedJobTypes: [] };
-      mutations.ADD_SELECTED_JOB_TYPES(state, ["Full-time", "Part-time"]);
+      const startingState = createState({ selectedJobTypes: [] });
+      mutations.ADD_SELECTED_JOB_TYPES(startingState, [
+        "Full-time",
+        "Part-time",
+      ]);
 
-      expect(state.selectedJobTypes).toEqual(["Full-time", "Part-time"]);
+      expect(startingState.selectedJobTypes).toEqual([
+        "Full-time",
+        "Part-time",
+      ]);
     });
   });
 });
