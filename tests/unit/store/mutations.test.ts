@@ -3,10 +3,15 @@ import state from "@/store/state";
 import { GlobalState } from "@/store/types";
 
 describe("mutations", () => {
+  const createState = (config: Partial<GlobalState> = {}): GlobalState => {
+    const initialState = state();
+
+    return { ...initialState, ...config };
+  };
+
   describe("LIGIN_USER", () => {
     it("logs user in", () => {
-      // const state = { isLoggedIn: false } as GlobalState;
-      const startingState = state();
+      const startingState = createState({ isLoggedIn: false });
       mutations.LOGIN_USER(startingState);
 
       expect(startingState.isLoggedIn).toBe(true);
