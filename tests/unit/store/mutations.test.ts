@@ -1,9 +1,10 @@
 import mutations from "@/store/mutations";
+import { GlobalState } from "@/store/types";
 
 describe("mutations", () => {
   describe("LIGIN_USER", () => {
     it("logs user in", () => {
-      const state = { isLoggedIn: false };
+      const state = { isLoggedIn: false } as GlobalState;
       mutations.LOGIN_USER(state);
 
       expect(state.isLoggedIn).toBe(true);
