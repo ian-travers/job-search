@@ -1,5 +1,6 @@
 import mutations from "@/store/mutations";
 import state from "@/store/state";
+import { Job } from "@/api/types";
 import { GlobalState } from "@/store/types";
 
 describe("mutations", () => {
@@ -8,6 +9,20 @@ describe("mutations", () => {
 
     return { ...initialState, ...config };
   };
+
+  const createJob = (config: Partial<Job> = {}): Job => ({
+    id: 1,
+    title: "Angular Developer",
+    organization: "Vue and Me",
+    degree: "Master's",
+    jobType: "Intern",
+    locations: ["Lisbon"],
+    minimumQualifications: [],
+    preferredQualifications: [],
+    description: [],
+    dateAdded: "2021-07-04",
+    ...config,
+  });
 
   describe("LIGIN_USER", () => {
     it("logs user in", () => {
@@ -20,10 +35,12 @@ describe("mutations", () => {
 
   describe("RECEIVE_JOBS", () => {
     it("receives jobs from API response", () => {
-      const state = { jobs: [] };
-      mutations.RECEIVE_JOBS(state, ["Job 1", "Job 2"]);
+      const startingState = createState({ jobs: [] });
+      const jobOne = createJob();
+      const jobTwo = createJob();
+      mutations.RECEIVE_JOBS(startingState, [jobOne, jobTwo]);
 
-      expect(state.jobs).toEqual(["Job 1", "Job 2"]);
+      expect(startingState.jobs).toEqual([jobOne, jobTwo]);
     });
   });
 
