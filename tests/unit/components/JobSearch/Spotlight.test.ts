@@ -2,11 +2,13 @@ import { mount, flushPromises } from "@vue/test-utils";
 import axios from "axios";
 jest.mock("axios");
 
-import Spotlight from "@/components/JobSearch/Spotlight";
+import Spotlight from "@/components/JobSearch/Spotlight.vue";
+
+const axiosGetMock = axios.get as jest.Mock;
 
 describe("Spotlight", () => {
   const mockSpotlightResponse = (data = {}) => {
-    axios.get.mockResolvedValue({
+    axiosGetMock.mockResolvedValue({
       data: [
         {
           img: "Some img",
