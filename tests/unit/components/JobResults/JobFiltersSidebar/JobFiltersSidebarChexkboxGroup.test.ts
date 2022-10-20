@@ -1,11 +1,13 @@
 import { mount } from "@vue/test-utils";
 import { useStore } from "vuex";
 jest.mock("vuex");
+const useStoreMock = useStore as jest.Mock;
 
 import { useRouter } from "vue-router";
 jest.mock("vue-router");
+const useRouterMock = useRouter as jest.Mock;
 
-import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup";
+import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
 describe("JobFiltersSidebarCheckboxGroup", () => {
   const createConfig = (props = {}) => ({
@@ -39,8 +41,8 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
   describe("when user click checkbox", () => {
     it("communicates thar user has selected checkbox for value", async () => {
       const commit = jest.fn();
-      useStore.mockReturnValue({ commit });
-      useRouter.mockReturnValue({ push: jest.fn() });
+      useStoreMock.mockReturnValue({ commit });
+      useRouterMock.mockReturnValue({ push: jest.fn() });
 
       const props = {
         uniqueValues: new Set(["ValueC"]),
@@ -53,15 +55,15 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
       const clickableArea = wrapper.find("[data-test='clickable-area']");
       await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='ValueC']");
-      await remoteInput.setChecked();
+      await remoteInput.setValue(true);
 
       expect(commit).toHaveBeenLastCalledWith("SOME_MUTATION", ["ValueC"]);
     });
 
     it("navigate user to job results page to see fresh batch of filtered jobs", async () => {
-      useStore.mockReturnValue({ commit: jest.fn() });
+      useStoreMock.mockReturnValue({ commit: jest.fn() });
       const push = jest.fn();
-      useRouter.mockReturnValue({ push });
+      useRouterMock.mockReturnValue({ push });
 
       const props = {
         uniqueValues: new Set(["Remote"]),
@@ -73,7 +75,7 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
       const clickableArea = wrapper.find("[data-test='clickable-area']");
       await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='Remote']");
-      await remoteInput.setChecked();
+      await remoteInput.setValue(true);
 
       expect(push).toHaveBeenCalledWith({ name: "JobResults" });
     });
