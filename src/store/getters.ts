@@ -1,6 +1,7 @@
 import {
   UNIQUE_ORGANIZATIONS,
   UNIQUE_JOB_TYPES,
+  UNIQUE_DEGREES,
   FILTERED_JOBS,
   INCLUDE_JOB_BY_ORGANIZATION,
   INCLUDE_JOB_BY_JOB_TYPE,
@@ -27,6 +28,10 @@ const getters = {
     state.jobs.forEach((job) => uniqueJobTypes.add(job.jobType));
 
     return uniqueJobTypes;
+  },
+
+  [UNIQUE_DEGREES](state: GlobalState) {
+    return state.degrees.map((degree) => degree.degree);
   },
 
   [INCLUDE_JOB_BY_ORGANIZATION]: (state: GlobalState) => (job: Job) => {

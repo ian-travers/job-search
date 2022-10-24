@@ -7,6 +7,7 @@ export const FETCH_JOBS = "FETCH_JOBS";
 export const FILTERED_JOBS = "FILTERED_JOBS";
 
 /** DEGREES */
+export const UNIQUE_DEGREES = "UNIQUE_DEGREES";
 export const RECEIVE_DEGREES = "RECEIVE_DEGREES";
 export const FETCH_DEGREES = "FETCH_DEGREES";
 
