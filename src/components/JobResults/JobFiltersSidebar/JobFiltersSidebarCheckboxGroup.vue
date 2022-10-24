@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, PropType } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -38,9 +38,18 @@ export default defineComponent({
   components: { Accordion },
 
   props: {
-    header: { type: String, required: true },
-    uniqueValues: { type: [Array, Set], required: true },
-    mutation: { type: String, required: true },
+    header: {
+      type: String,
+      required: true,
+    },
+    uniqueValues: {
+      type: [Array, Set] as PropType<string[] | Set<string>>,
+      required: true,
+    },
+    mutation: {
+      type: String,
+      required: true,
+    },
   },
 
   setup(props) {
