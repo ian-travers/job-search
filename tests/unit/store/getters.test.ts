@@ -93,6 +93,30 @@ describe("getters", () => {
     });
   });
 
+  describe("INCLUDE_JOB_BY_DEGREE", () => {
+    describe("when user has not selected any degree", () => {
+      it("includes job", () => {
+        const state = createState({
+          selectedDegrees: [],
+        });
+        const job = createJob({ degree: "Master's" });
+        const includeJob = getters.INCLUDE_JOB_BY_DEGREE(state)(job);
+
+        expect(includeJob).toBe(true);
+      });
+    });
+
+    it("identifies if job is associated with given degree", () => {
+      const state = createState({
+        selectedDegrees: ["Master's", "Ph.D"],
+      });
+      const job = createJob({ degree: "Master's" });
+      const includeJob = getters.INCLUDE_JOB_BY_DEGREE(state)(job);
+
+      expect(includeJob).toBe(true);
+    });
+  });
+
   describe("FILTERED_JOBS", () => {
     it("filters jobs by organization and job type", () => {
       const INCLUDE_JOB_BY_ORGANIZATION = jest.fn().mockReturnValue(true);

@@ -5,6 +5,7 @@ import {
   FILTERED_JOBS,
   INCLUDE_JOB_BY_ORGANIZATION,
   INCLUDE_JOB_BY_JOB_TYPE,
+  INCLUDE_JOB_BY_DEGREE,
 } from "@/store/costants";
 
 import { GlobalState } from "@/store/types";
@@ -44,6 +45,12 @@ const getters = {
     if (state.selectedJobTypes.length === 0) return true;
 
     return state.selectedJobTypes.includes(job.jobType);
+  },
+
+  [INCLUDE_JOB_BY_DEGREE]: (state: GlobalState) => (job: Job) => {
+    if (state.selectedDegrees.length === 0) return true;
+
+    return state.selectedDegrees.includes(job.degree);
   },
 
   [FILTERED_JOBS](state: GlobalState, getters: IncludeJobGetters) {
