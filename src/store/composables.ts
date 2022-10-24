@@ -4,6 +4,7 @@ import { useStore } from "vuex";
 import {
   FETCH_JOBS,
   FILTERED_JOBS,
+  UNIQUE_DEGREES,
   UNIQUE_JOB_TYPES,
   UNIQUE_ORGANIZATIONS,
 } from "@/store/costants";
@@ -29,6 +30,12 @@ export const useUniqueOrganizations = () => {
   const store = useStore(key);
 
   return computed<Set<string>>(() => store.getters[UNIQUE_ORGANIZATIONS]);
+};
+
+export const useUniqueDegrees = () => {
+  const store = useStore(key);
+
+  return computed<string[]>(() => store.getters[UNIQUE_DEGREES]);
 };
 
 /** ACTIONS */
