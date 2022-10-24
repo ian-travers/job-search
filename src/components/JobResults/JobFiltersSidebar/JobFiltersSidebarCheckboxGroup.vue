@@ -39,7 +39,7 @@ export default defineComponent({
 
   props: {
     header: { type: String, required: true },
-    uniqueValues: { type: Set, required: true },
+    uniqueValues: { type: [Array, Set], required: true },
     mutation: { type: String, required: true },
   },
 
