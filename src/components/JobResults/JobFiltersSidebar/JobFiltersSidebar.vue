@@ -12,26 +12,29 @@
         </div>
       </div>
 
-      <job-filters-sidebar-checkbox-group
-        header="Degrees"
-        :unique-values="uniqueDegrees"
-        :mutation="ADD_SELECTED_DEGREES"
-        data-test="degrees-filter"
-      />
+      <accordion header="Degrees">
+        <job-filters-sidebar-checkbox-group
+          :unique-values="uniqueDegrees"
+          :mutation="ADD_SELECTED_DEGREES"
+          data-test="degrees-filter"
+        />
+      </accordion>
 
-      <job-filters-sidebar-checkbox-group
-        header="Job Types"
-        :unique-values="uniqueJobTypes"
-        :mutation="ADD_SELECTED_JOB_TYPES"
-        data-test="job-types-filter"
-      />
+      <accordion header="Job Types">
+        <job-filters-sidebar-checkbox-group
+          :unique-values="uniqueJobTypes"
+          :mutation="ADD_SELECTED_JOB_TYPES"
+          data-test="job-types-filter"
+        />
+      </accordion>
 
-      <job-filters-sidebar-checkbox-group
-        header="Organizations"
-        :unique-values="uniqueOrganizations"
-        :mutation="ADD_SELECTED_ORGANIZATIONS"
-        data-test="organizations-filter"
-      />
+      <accordion header="Organizations">
+        <job-filters-sidebar-checkbox-group
+          :unique-values="uniqueOrganizations"
+          :mutation="ADD_SELECTED_ORGANIZATIONS"
+          data-test="organizations-filter"
+        />
+      </accordion>
     </section>
   </div>
 </template>
@@ -42,6 +45,7 @@ import { useStore } from "vuex";
 
 import { key } from "@/store";
 
+import Accordion from "@/components/Shared/Accordion.vue";
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
@@ -61,6 +65,7 @@ export default defineComponent({
   name: "JobFIltersSidebar",
 
   components: {
+    Accordion,
     ActionButton,
     JobFiltersSidebarCheckboxGroup,
   },

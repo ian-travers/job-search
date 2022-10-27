@@ -1,4 +1,4 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import { useStore } from "vuex";
 jest.mock("vuex");
 const useStoreMock = useStore as jest.Mock;
@@ -11,13 +11,7 @@ import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSi
 
 describe("JobFiltersSidebarCheckboxGroup", () => {
   const createConfig = (props = {}) => ({
-    global: {
-      stubs: {
-        FontAwesomeIcon: true,
-      },
-    },
     props: {
-      header: "Test Header",
       uniqueValues: new Set(["ValueA", "ValueB"]),
       mutation: "Test mutation",
       ...props,
@@ -29,10 +23,10 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
     const props = {
       uniqueValues: new Set(["ValueA", "ValueB"]),
     };
-    const wrapper = mount(JobFiltersSidebarCheckboxGroup, createConfig(props));
-    const clickableArea = wrapper.find("[data-test='clickable-area']");
-    await clickableArea.trigger("click");
-
+    const wrapper = shallowMount(
+      JobFiltersSidebarCheckboxGroup,
+      createConfig(props)
+    );
     const inputLabels = wrapper.findAll("[data-test='value']");
     const inputValues = inputLabels.map((node) => node.text());
 
@@ -49,12 +43,10 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
         uniqueValues: new Set(["ValueC"]),
         mutation: "SOME_MUTATION",
       };
-      const wrapper = mount(
+      const wrapper = shallowMount(
         JobFiltersSidebarCheckboxGroup,
         createConfig(props)
       );
-      const clickableArea = wrapper.find("[data-test='clickable-area']");
-      await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='ValueC']");
       await remoteInput.setValue(true);
 
@@ -69,12 +61,10 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
       const props = {
         uniqueValues: new Set(["Remote"]),
       };
-      const wrapper = mount(
+      const wrapper = shallowMount(
         JobFiltersSidebarCheckboxGroup,
         createConfig(props)
       );
-      const clickableArea = wrapper.find("[data-test='clickable-area']");
-      await clickableArea.trigger("click");
       const remoteInput = wrapper.find("[data-test='Remote']");
       await remoteInput.setValue(true);
 
