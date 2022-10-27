@@ -5,6 +5,7 @@
       <action-button
         text="Clear Filters"
         type="secondary"
+        data-test="clear-job-filters"
         @click="clearUserJobFilterSelections"
       />
     </div>
