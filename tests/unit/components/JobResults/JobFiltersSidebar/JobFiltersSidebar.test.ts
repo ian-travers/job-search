@@ -1,4 +1,5 @@
 import { shallowMount, VueWrapper } from "@vue/test-utils";
+jest.mock("vuex");
 
 import {
   useUniqueJobTypes,
