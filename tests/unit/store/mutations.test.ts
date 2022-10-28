@@ -81,12 +81,14 @@ describe("mutations", () => {
         selectedOrganizations: ["Amazon"],
         selectedJobTypes: ["Remote"],
         selectedDegrees: ["Ph.D."],
+        skillsSearchTerm: "Vue",
       });
       mutations.CLEAR_USER_JOB_FILTER_SELECTIONS(startingState);
 
       expect(startingState.selectedOrganizations).toEqual([]);
       expect(startingState.selectedJobTypes).toEqual([]);
       expect(startingState.selectedDegrees).toEqual([]);
+      expect(startingState.skillsSearchTerm).toEqual("");
     });
   });
 });
