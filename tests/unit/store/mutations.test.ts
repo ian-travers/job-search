@@ -66,6 +66,15 @@ describe("mutations", () => {
     });
   });
 
+  describe("UPDATE_SKILLS_SEARCH_TERM", () => {
+    it("receives search term for skills the user has", () => {
+      const startingState = createState({ skillsSearchTerm: "" });
+      mutations.UPDATE_SKILLS_SEARCH_TERM(startingState, "Manager");
+
+      expect(startingState.skillsSearchTerm).toBe("Manager");
+    });
+  });
+
   describe("CLEAR_USER_JOB_FILTER_SELECTIONS", () => {
     it("removes all job filters that user has chosen", () => {
       const startingState = createState({
