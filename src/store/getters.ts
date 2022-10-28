@@ -16,6 +16,7 @@ interface IncludeJobGetters {
   INCLUDE_JOB_BY_ORGANIZATION: (job: Job) => boolean;
   INCLUDE_JOB_BY_JOB_TYPE: (job: Job) => boolean;
   INCLUDE_JOB_BY_DEGREE: (job: Job) => boolean;
+  INCLUDE_JOB_BY_SKILL: (job: Job) => boolean;
 }
 
 const getters = {
@@ -65,7 +66,8 @@ const getters = {
     return state.jobs
       .filter((job) => getters.INCLUDE_JOB_BY_ORGANIZATION(job))
       .filter((job) => getters.INCLUDE_JOB_BY_JOB_TYPE(job))
-      .filter((job) => getters.INCLUDE_JOB_BY_DEGREE(job));
+      .filter((job) => getters.INCLUDE_JOB_BY_DEGREE(job))
+      .filter((job) => getters.INCLUDE_JOB_BY_SKILL(job));
   },
 };
 

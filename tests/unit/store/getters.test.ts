@@ -146,14 +146,16 @@ describe("getters", () => {
   });
 
   describe("FILTERED_JOBS", () => {
-    it("filters jobs by organization, job type and degree", () => {
+    it("filters jobs by organization, job type, degree and skills", () => {
       const INCLUDE_JOB_BY_ORGANIZATION = jest.fn().mockReturnValue(true);
       const INCLUDE_JOB_BY_JOB_TYPE = jest.fn().mockReturnValue(true);
       const INCLUDE_JOB_BY_DEGREE = jest.fn().mockReturnValue(true);
+      const INCLUDE_JOB_BY_SKILL = jest.fn().mockReturnValue(true);
       const mockGetters = {
         INCLUDE_JOB_BY_ORGANIZATION,
         INCLUDE_JOB_BY_JOB_TYPE,
         INCLUDE_JOB_BY_DEGREE,
+        INCLUDE_JOB_BY_SKILL,
       };
       const job = createJob({ id: 1, title: "Best job ever" });
       const state = createState({
@@ -165,6 +167,7 @@ describe("getters", () => {
       expect(INCLUDE_JOB_BY_ORGANIZATION).toHaveBeenCalledWith(job);
       expect(INCLUDE_JOB_BY_JOB_TYPE).toHaveBeenCalledWith(job);
       expect(INCLUDE_JOB_BY_DEGREE).toHaveBeenCalledWith(job);
+      expect(INCLUDE_JOB_BY_SKILL).toHaveBeenCalledWith(job);
     });
   });
 });
