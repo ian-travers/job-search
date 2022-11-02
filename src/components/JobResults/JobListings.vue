@@ -33,8 +33,8 @@
   </main>
 </template>
 
-<script lang="ts">
-import { computed, onMounted, defineComponent } from "vue";
+<script setup lang="ts">
+import { computed, onMounted } from "vue";
 
 import useCurrentPage from "@/composables/useCurrentPage";
 import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
@@ -46,35 +46,25 @@ import {
 
 import JobListing from "./JobListing.vue";
 
-export default defineComponent({
-  name: "JobListings",
+onMounted(useFetchJobsDispatch);
+onMounted(useFetchDegreesDispatch);
 
-  components: { JobListing },
+const filteredJobs = useFilteredJobs();
 
-  setup() {
-    onMounted(useFetchJobsDispatch);
-    onMounted(useFetchDegreesDispatch);
+const currentPage = useCurrentPage();
 
-    const filteredJobs = useFilteredJobs();
+const maxPage = computed(() => Math.ceil(filteredJobs.value.length / 10));
 
-    const currentPage = useCurrentPage();
+const { previousPage, nextPage } = usePreviousAndNextPages(
+  currentPage,
+  maxPage
+);
 
-    const maxPage = computed(() => Math.ceil(filteredJobs.value.length / 10));
+const displayedJobs = computed(() => {
+  const pageNumber = currentPage.value;
+  const firstJobIndex = (pageNumber - 1) * 10;
+  const lastJobIndex = pageNumber * 10;
 
-    const { previousPage, nextPage } = usePreviousAndNextPages(
-      currentPage,
-      maxPage
-    );
-
-    const displayedJobs = computed(() => {
-      const pageNumber = currentPage.value;
-      const firstJobIndex = (pageNumber - 1) * 10;
-      const lastJobIndex = pageNumber * 10;
-
-      return filteredJobs.value.slice(firstJobIndex, lastJobIndex);
-    });
-
-    return { displayedJobs, currentPage, previousPage, nextPage };
-  },
+  return filteredJobs.value.slice(firstJobIndex, lastJobIndex);
 });
 </script>
