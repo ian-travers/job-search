@@ -66,16 +66,23 @@ const menuItems = [
 
 const store = useStore(key);
 
-let isLoggedIn = store.state.isLoggedIn;
+const isLoggedIn = computed({
+  get() {
+    return store.state.isLoggedIn;
+  },
+  set() {
+    store.commit(LOGIN_USER);
+  },
+});
+
 const headerHeightClass = computed(() => {
   return {
-    "h-16": !isLoggedIn,
-    "h-32": isLoggedIn,
+    "h-16": !isLoggedIn.value,
+    "h-32": isLoggedIn.value,
   };
 });
 
 const loginUser = () => {
   store.commit(LOGIN_USER);
-  isLoggedIn = store.state.isLoggedIn;
 };
 </script>
