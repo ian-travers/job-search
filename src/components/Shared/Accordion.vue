@@ -17,31 +17,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, ref, defineComponent } from "vue";
+<script setup lang="ts">
+import { computed, ref } from "vue";
 
-export default defineComponent({
-  name: "Accordion",
-
-  props: {
-    header: {
-      type: String,
-      required: true,
-    },
-  },
-
-  setup() {
-    const isOpen = ref(false);
-
-    const open = () => {
-      isOpen.value = !isOpen.value;
-    };
-
-    const caretIcon = computed(() =>
-      isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
-    );
-
-    return { open, isOpen, caretIcon };
+defineProps({
+  header: {
+    type: String,
+    required: true,
   },
 });
+
+const isOpen = ref(false);
+
+const open = () => {
+  isOpen.value = !isOpen.value;
+};
+
+const caretIcon = computed(() =>
+  isOpen.value ? ["fas", "angle-up"] : ["fas", "angle-down"]
+);
 </script>
