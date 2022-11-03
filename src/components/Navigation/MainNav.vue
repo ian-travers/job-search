@@ -34,7 +34,7 @@
             v-else
             text="Sign in"
             data-test="login-button"
-            @click="LOGIN_USER()"
+            @click="loginUser"
           />
         </div>
       </div>
@@ -43,45 +43,39 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { mapMutations, mapState } from "vuex";
+<script setup lang="ts">
+import { useStore } from "vuex";
+import { computed } from "vue";
 
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import ProfileImage from "@/components/Navigation/ProfileImage.vue";
 import Subnav from "@/components/Navigation/Subnav.vue";
 
+import { key } from "@/store";
+
 import { LOGIN_USER } from "@/store/costants";
 
-export default defineComponent({
-  name: "MainNav",
-  components: { ActionButton, ProfileImage, Subnav },
+const menuItems = [
+  { text: "Teams", url: "/teams" },
+  { text: "Locations", url: "/" },
+  { text: "Life at Bobo", url: "/" },
+  { text: "How we hire", url: "/" },
+  { text: "Students", url: "/" },
+  { text: "Jobs", url: "/jobs/results" },
+];
 
-  data() {
-    return {
-      menuItems: [
-        { text: "Teams", url: "/teams" },
-        { text: "Locations", url: "/" },
-        { text: "Life at Bobo", url: "/" },
-        { text: "How we hire", url: "/" },
-        { text: "Students", url: "/" },
-        { text: "Jobs", url: "/jobs/results" },
-      ],
-    };
-  },
+const store = useStore(key);
 
-  computed: {
-    headerHeightClass() {
-      return {
-        "h-16": !this.isLoggedIn,
-        "h-32": this.isLoggedIn,
-      };
-    },
-    ...mapState(["isLoggedIn"]),
-  },
-
-  methods: {
-    ...mapMutations([LOGIN_USER]),
-  },
+let isLoggedIn = store.state.isLoggedIn;
+const headerHeightClass = computed(() => {
+  return {
+    "h-16": !isLoggedIn,
+    "h-32": isLoggedIn,
+  };
 });
+
+const loginUser = () => {
+  store.commit(LOGIN_USER);
+  isLoggedIn = store.state.isLoggedIn;
+};
 </script>
