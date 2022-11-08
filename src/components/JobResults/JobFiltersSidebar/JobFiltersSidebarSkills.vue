@@ -9,29 +9,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 import { key } from "@/store";
 import { UPDATE_SKILLS_SEARCH_TERM } from "@/store/costants";
 
-export default defineComponent({
-  name: "JobFiltersSidebarSkills",
+const store = useStore(key);
 
-  setup() {
-    const store = useStore(key);
-
-    const skillsSearchTerm = computed({
-      get() {
-        return store.state.skillsSearchTerm;
-      },
-      set(value) {
-        store.commit(UPDATE_SKILLS_SEARCH_TERM, value);
-      },
-    });
-
-    return { skillsSearchTerm };
+const skillsSearchTerm = computed({
+  get() {
+    return store.state.skillsSearchTerm;
+  },
+  set(value) {
+    store.commit(UPDATE_SKILLS_SEARCH_TERM, value);
   },
 });
 </script>

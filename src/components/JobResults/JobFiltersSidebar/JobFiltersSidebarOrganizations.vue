@@ -6,23 +6,11 @@
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
+<script setup lang="ts">
 import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
 import { useUniqueOrganizations } from "@/store/composables";
 import { ADD_SELECTED_ORGANIZATIONS } from "@/store/costants";
 
-export default defineComponent({
-  name: "JobFiltersSidebarOrganizations",
-
-  components: { JobFiltersSidebarCheckboxGroup },
-
-  setup() {
-    const uniqueOrganizations = useUniqueOrganizations();
-
-    return { uniqueOrganizations, ADD_SELECTED_ORGANIZATIONS };
-  },
-});
+const uniqueOrganizations = useUniqueOrganizations();
 </script>

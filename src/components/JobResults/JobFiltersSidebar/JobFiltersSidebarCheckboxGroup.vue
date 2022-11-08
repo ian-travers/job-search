@@ -21,46 +21,38 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { ref, PropType } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 import { key } from "@/store";
 import { CLEAR_USER_JOB_FILTER_SELECTIONS } from "@/store/costants";
 
-export default defineComponent({
-  name: "JobFiltersSidebarCheckboxGroup",
-
-  props: {
-    uniqueValues: {
-      type: [Array, Set] as PropType<string[] | Set<string>>,
-      required: true,
-    },
-    mutation: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  uniqueValues: {
+    type: [Array, Set] as PropType<string[] | Set<string>>,
+    required: true,
   },
-
-  setup(props) {
-    const store = useStore(key);
-    const router = useRouter();
-
-    const selectedValues = ref<string[]>([]);
-
-    store.subscribe((mutation) => {
-      if (mutation.type === CLEAR_USER_JOB_FILTER_SELECTIONS) {
-        selectedValues.value = [];
-      }
-    });
-
-    const selectValue = () => {
-      store.commit(props.mutation, selectedValues.value);
-      router.push({ name: "JobResults" });
-    };
-
-    return { selectedValues, selectValue };
+  mutation: {
+    type: String,
+    required: true,
   },
 });
+
+const store = useStore(key);
+const router = useRouter();
+
+const selectedValues = ref<string[]>([]);
+
+store.subscribe((mutation) => {
+  if (mutation.type === CLEAR_USER_JOB_FILTER_SELECTIONS) {
+    selectedValues.value = [];
+  }
+});
+
+const selectValue = () => {
+  store.commit(props.mutation, selectedValues.value);
+  router.push({ name: "JobResults" });
+};
 </script>

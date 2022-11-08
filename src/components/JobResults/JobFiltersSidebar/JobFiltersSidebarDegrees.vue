@@ -6,23 +6,11 @@
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
+<script setup lang="ts">
 import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
 import { useUniqueDegrees } from "@/store/composables";
 import { ADD_SELECTED_DEGREES } from "@/store/costants";
 
-export default defineComponent({
-  name: "JobFiltersSidebarDegrees",
-
-  components: { JobFiltersSidebarCheckboxGroup },
-
-  setup() {
-    const uniqueDegrees = useUniqueDegrees();
-
-    return { uniqueDegrees, ADD_SELECTED_DEGREES };
-  },
-});
+const uniqueDegrees = useUniqueDegrees();
 </script>
