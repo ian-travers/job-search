@@ -12,54 +12,36 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import nextElementInList from "@/utils/nextElementInList";
+import { ref, computed, onBeforeUnmount } from "vue";
 
-interface Data {
-  action: string;
-  interval?: number;
-}
 interface ActionClasses {
   [x: string]: boolean;
 }
 
-export default defineComponent({
-  name: "Headline",
+let action = ref("Build");
+let interval = 0;
 
-  data(): Data {
-    return {
-      action: "Build",
-      interval: undefined,
-    };
-  },
-
-  computed: {
-    actionClasses(): ActionClasses {
-      return {
-        [this.action.toLowerCase()]: true,
-      };
-    },
-  },
-
-  created() {
-    this.changeTitle();
-  },
-
-  beforeUnmount() {
-    clearInterval(this.interval);
-  },
-
-  methods: {
-    changeTitle() {
-      this.interval = setInterval(() => {
-        const actions = ["Build", "Create", "Design", "Code"];
-
-        this.action = nextElementInList(actions, this.action);
-      }, 3000);
-    },
-  },
+const actionClasses = computed((): ActionClasses => {
+  return {
+    [action.value.toLowerCase()]: true,
+  };
 });
+
+onBeforeUnmount(() => {
+  clearInterval(interval);
+});
+
+const changeTitle = () => {
+  interval = setInterval(() => {
+    const actions = ["Build", "Create", "Design", "Code"];
+
+    action.value = nextElementInList(actions, action.value);
+  }, 3000);
+};
+
+changeTitle();
 </script>
 
 <style scoped>
