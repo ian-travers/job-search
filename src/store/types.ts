@@ -9,3 +9,8 @@ export interface GlobalState {
   selectedJobTypes: string[];
   selectedDegrees: string[];
 }
+
+export interface UserState {
+  isLoggedIn: boolean;
+  name: string;
+}
