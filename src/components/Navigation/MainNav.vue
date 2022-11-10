@@ -29,7 +29,12 @@
         </nav>
 
         <div class="flex items-center h-full ml-auto">
-          <profile-image v-if="isLoggedIn" data-test="profile-image" />
+          <div v-if="isLoggedIn" class="flex items-center space-x-2">
+            <profile-image v-if="isLoggedIn" data-test="profile-image" />
+            <p>{{ userStore.firstName }}</p>
+            <action-button text="Logout" @click="logoutUser" />
+          </div>
+
           <action-button
             v-else
             text="Sign in"
@@ -44,17 +49,13 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from "vuex";
 import { computed } from "vue";
 
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import ProfileImage from "@/components/Navigation/ProfileImage.vue";
 import Subnav from "@/components/Navigation/Subnav.vue";
 
-import { key } from "@/store";
-
-import { LOGIN_USER } from "@/store/costants";
-// import { useUserStore } from "@/store/UserStore";
+import { useUserStore } from "@/store/UserStore";
 
 const menuItems = [
   { text: "Teams", url: "/teams" },
@@ -65,15 +66,14 @@ const menuItems = [
   { text: "Jobs", url: "/jobs/results" },
 ];
 
-const store = useStore(key);
-// const userStore = useUserStore();
+const userStore = useUserStore();
 
 const isLoggedIn = computed({
   get() {
-    return store.state.isLoggedIn;
+    return userStore.isLoggedIn;
   },
   set() {
-    store.commit(LOGIN_USER);
+    userStore.LOGIN_USER();
   },
 });
 
@@ -85,6 +85,10 @@ const headerHeightClass = computed(() => {
 });
 
 const loginUser = () => {
-  store.commit(LOGIN_USER);
+  userStore.LOGIN_USER();
+};
+
+const logoutUser = () => {
+  userStore.LOGOUT_USER();
 };
 </script>
