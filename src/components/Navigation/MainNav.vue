@@ -54,7 +54,7 @@ import Subnav from "@/components/Navigation/Subnav.vue";
 import { key } from "@/store";
 
 import { LOGIN_USER } from "@/store/costants";
-import { useUserStore } from "@/store/UserStore";
+// import { useUserStore } from "@/store/UserStore";
 
 const menuItems = [
   { text: "Teams", url: "/teams" },
@@ -66,11 +66,11 @@ const menuItems = [
 ];
 
 const store = useStore(key);
-const userStore = useUserStore();
+// const userStore = useUserStore();
 
 const isLoggedIn = computed({
   get() {
-    return userStore.isLoggedIn;
+    return store.state.isLoggedIn;
   },
   set() {
     store.commit(LOGIN_USER);
