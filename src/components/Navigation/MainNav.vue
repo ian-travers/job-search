@@ -32,7 +32,11 @@
           <div v-if="isLoggedIn" class="flex items-center space-x-2">
             <profile-image v-if="isLoggedIn" data-test="profile-image" />
             <p>{{ userStore.firstName }}</p>
-            <action-button text="Logout" @click="logoutUser" />
+            <action-button
+              text="Logout"
+              data-test="logout-button"
+              @click="logoutUser"
+            />
           </div>
 
           <action-button
